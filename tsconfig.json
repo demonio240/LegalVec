@@ -1,0 +1,33 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "declaration": true,
+        "removeComments": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "allowSyntheticDefaultImports": true,
+        "target": "ES2021",
+        "sourceMap": true,
+        "outDir": "./dist",
+        // 🆕 1. Solución al error TS5011: Le decimos que la raíz absoluta es esta carpeta
+        "rootDir": "./",
+        "baseUrl": "./",
+        // 🆕 2. Solución al error TS5101: Silenciamos la advertencia del futuro TypeScript 7.0
+        "ignoreDeprecations": "6.0",
+        "paths": {
+            "@DocumentProcessing/*": [
+                "src/DocumentProcessing/*"
+            ],
+            "@Subscription/*": [
+                "src/Subscription/*"
+            ],
+            "@Shared/*": [
+                "src/Shared/*"
+            ]
+        }
+    },
+    "exclude": [
+        "node_modules",
+        "dist"
+    ]
+}
