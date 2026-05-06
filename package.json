@@ -8,7 +8,10 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start:doc-engine": "nest start document-processing-backend --exec \"node dist/apps/DocumentProcessing/backend/main.js\""
+    "start:doc-engine": "nest start document-processing-backend --exec \"node dist/apps/DocumentProcessing/backend/main.js\"",
+    "test:bdd": "cucumber-js",
+    "test:bdd:docs": "cucumber-js -p vectorization_engine",
+    "test:bdd:subs": "cucumber-js -p subscriptions"
   },
   "keywords": [],
   "author": "",
@@ -21,10 +24,14 @@
     "rxjs": "^7.8.2"
   },
   "devDependencies": {
+    "@cucumber/cucumber": "^12.8.2",
     "@nestjs/cli": "^11.0.21",
     "@nestjs/schematics": "^11.1.0",
     "@nestjs/testing": "^11.1.19",
+    "@types/cucumber": "^6.0.1",
     "@types/node": "^25.6.0",
+    "@types/supertest": "^7.2.0",
+    "supertest": "^7.2.2",
     "ts-loader": "^9.5.7",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
