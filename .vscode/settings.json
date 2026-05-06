@@ -1,0 +1,10 @@
+{
+  "cucumber.features": [
+    "apps/DocumentProcessing/backend/test/features/**/*.feature"
+  ],
+  "cucumber.glue": [
+    "apps/DocumentProcessing/backend/test/features/**/*.ts",
+    "apps/DocumentProcessing/backend/test/step-definitions/**/*.ts",
+    "test/Shared/Infrastructure/Cucumber/**/*.ts"
+  ]
+}

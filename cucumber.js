@@ -1,4 +1,9 @@
 // LegalVec/cucumber.js
+
+// 1. Importas las configuraciones de cada Bounded Context
+const documentProcessingSuites = require('./apps/DocumentProcessing/backend/test/document_processing.cucumber.js');
+const subscriptionSuites = require('./apps/Subscription/backend/test/subscription.cucumber.js');
+
 const commonConfig = [
   '--require-module ts-node/register', // Para que Cucumber entienda TypeScript
   '--format progress-bar'              // Formato de salida en consola
@@ -8,33 +13,17 @@ module.exports = {
   // 1. Suite GLOBAL (Corre absolutamente todos los Bounded Contexts)
   default: [
     ...commonConfig,
+    // Carga TODAS las features de todos los BCs
     'apps/**/test/features/**/*.feature',             
-    '--require test/Shared/Infrastructure/Cucumber/**/*.steps.ts' 
+    // Carga los steps compartidos (ApiContext, etc.)
+    '--require test/Shared/Infrastructure/Cucumber/**/*.steps.ts',
+    // Carga los setups y steps específicos de CADA BC
+    '--require apps/**/test/features/**/*.steps.ts' 
   ].join(' '),
 
-  // 2. Suite ESPECÍFICA para tu Bounded Context "DocumentProcessing"
-  // Solo correrá tests del motor de vectorización
-  vectorization_engine: [
-    ...commonConfig,
-
-    // 🟢 setup: Levanta el "Kernel" específico para esta app
-    '--require apps/DocumentProcessing/backend/test/features/setup.steps.ts',
-
-    // 🟢 paths: Busca solo en la app de documentos
-    'apps/DocumentProcessing/backend/test/features/**/*.feature', 
-    
-    // 🟢 contexts: Tu traductor base global
-    '--require test/Shared/Infrastructure/Cucumber/ApiContext.steps.ts', 
-
-    // Si en el futuro necesitas un traductor específico para manipular 
-    // variables internas del motor de vectorización (sin tocar la API), iría aquí.
-  ].join(' '),
-
-  // 3. Suite ESPECÍFICA para Suscripciones (Para el futuro)
-  subscriptions: [
-    ...commonConfig,
-    'apps/Subscription/backend/test/features/**/*.feature', 
-    '--require test/Shared/Infrastructure/Cucumber/ApiContext.steps.ts', 
-    '--require apps/Subscription/backend/test/features/setup.steps.ts'
-  ].join(' ')
+  // 2. Suites descentralizadas por Bounded Context
+  // Al usar "..." (spread operator), estamos inyectando todas las suites
+  // (como VectorizationEngine, DocumentProcessing_all, etc) directamente aquí
+  ...documentProcessingSuites,
+  ...subscriptionSuites
 };

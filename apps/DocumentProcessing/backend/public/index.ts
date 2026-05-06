@@ -1,5 +1,5 @@
 import { NestFactory } from '@nestjs/core';
-import { DocumentProcessingModule } from './document-processing.module';
+import { DocumentProcessingModule } from '../src/document-processing.module';
 
 async function bootstrap() {
     // Le decimos a Nest que levante la app usando nuestro módulo raíz
