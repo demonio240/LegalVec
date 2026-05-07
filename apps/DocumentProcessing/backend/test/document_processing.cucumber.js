@@ -1,6 +1,7 @@
 // apps/DocumentProcessing/backend/test/document_processing.cucumber.js
 const commonConfig = [
   '--require-module ts-node/register',
+  '--require-module tsconfig-paths/register',
   '--format progress-bar'
 ];
 

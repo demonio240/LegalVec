@@ -6,6 +6,7 @@ const subscriptionSuites = require('./apps/Subscription/backend/test/subscriptio
 
 const commonConfig = [
   '--require-module ts-node/register', // Para que Cucumber entienda TypeScript
+  '--require-module tsconfig-paths/register', // Para que entienda los path aliases de tsconfig.json
   '--format progress-bar'              // Formato de salida en consola
 ];
 
