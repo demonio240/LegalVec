@@ -1,6 +1,6 @@
 import { Controller, Post } from "@nestjs/common";
 
-@Controller('vectorize')
+@Controller('vectorized-documents')
 export class VectorizeDocumentController {
     @Post()
     async run() {
