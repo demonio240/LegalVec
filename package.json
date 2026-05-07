@@ -11,7 +11,7 @@
     "start:doc-engine": "nest start document-processing-backend --exec \"node dist/apps/DocumentProcessing/backend/public/index.js\"",
     "console:docs": "ts-node apps/DocumentProcessing/backend/bin/console.ts",
     "test:bdd": "cucumber-js",
-    "test:bdd:docs": "cucumber-js -p vectorization_engine",
+    "test:bdd:docs": "cucumber-js -p VectorizationEngine",
     "test:bdd:subs": "cucumber-js -p subscriptions"
   },
   "keywords": [],
