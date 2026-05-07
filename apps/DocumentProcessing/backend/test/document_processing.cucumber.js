@@ -11,11 +11,12 @@ module.exports = {
     // paths: [ apps/mooc/backend/tests/features/VectorizationEngine ]
     'apps/DocumentProcessing/backend/test/features/VectorizationEngine/**/*.feature', 
     
-    // contexts: (Tus traductores globales y específicos)
-    '--require test/Shared/Infrastructure/Cucumber/ApiContext.steps.ts', 
 
     // setup.steps.ts: Levanta el Kernel de Document Processing
-    '--require apps/DocumentProcessing/backend/test/features/setup.steps.ts'
+    '--require apps/DocumentProcessing/backend/test/features/setup.steps.ts',
+
+    // contexts: (Tus traductores globales y específicos)
+    '--require test/Shared/Infrastructure/Cucumber/ApiContext.steps.ts', 
   ].join(' '),
 
   // Opcional: Una suite que corra TODOS los submódulos de este Bounded Context a la vez
