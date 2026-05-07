@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { VectorizeDocumentController } from './Controller/VectorizationEngine/VectorizationEnginePutController';
+import { VectorizeDocumentController } from './Controller/VectorizationEngine/VectorizationEnginePostController';
 
 @Module({
     imports: [
