@@ -1,12 +1,17 @@
-import { Controller, Post, Body, HttpStatus } from '@nestjs/common';
+import { Controller, Post, Body } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { ApiController } from '@Shared/Infrastructure/NestJS/ApiController';
+import { ApiExceptionsHttpStatusCodeMapping } from '@Shared/Infrastructure/NestJS/ApiExceptionsHttpStatusCodeMapping';
 import { VectorizeDocumentCommand } from '@DocumentProcessing/VectorizationEngine/Application/VectorizeDocumentCommand';
 
 @Controller('vectorized-documents')
 export class VectorizeDocumentPostController extends ApiController {
-    constructor(commandBus: CommandBus, queryBus: QueryBus) {
-        super(commandBus, queryBus);
+    constructor(
+        commandBus: CommandBus,
+        queryBus: QueryBus,
+        exceptionHandler: ApiExceptionsHttpStatusCodeMapping,
+    ) {
+        super(commandBus, queryBus, exceptionHandler);
     }
 
     @Post()
