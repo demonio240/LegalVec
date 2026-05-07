@@ -4,7 +4,7 @@ import { CommandBus } from "@nestjs/cqrs";
 
 
 @Controller('vectorized-documents')
-export class VectorizeDocumentController {
+export class VectorizeDocumentPostController {
     constructor(private readonly commandBus: CommandBus) {}
 
     @Post()
