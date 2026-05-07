@@ -12,7 +12,8 @@
     "console:docs": "ts-node -r tsconfig-paths/register apps/DocumentProcessing/backend/bin/console.ts",
     "test:bdd": "cucumber-js",
     "test:bdd:docs": "cucumber-js -p VectorizedDocument",
-    "test:bdd:subs": "cucumber-js -p subscriptions"
+    "test:bdd:subs": "cucumber-js -p subscriptions",
+    "test:unit": "jest"
   },
   "keywords": [],
   "author": "",
