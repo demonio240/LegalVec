@@ -1,8 +1,8 @@
-import { Controller, Put } from "@nestjs/common";
+import { Controller, Post } from "@nestjs/common";
 
-@Controller('api/vectorization')
+@Controller('vectorize')
 export class VectorizeDocumentController {
-    @Put()
+    @Post()
     async run() {
         // Lógica para procesar y vectorizar
         return { status: "created" }; // Que por defecto devuelve un 201

@@ -1,11 +1,12 @@
 import { Module } from '@nestjs/common';
+import { VectorizeDocumentController } from './Controller/VectorizationEngine/VectorizationEnginePutController';
 
 @Module({
     imports: [
         // Aquí importaremos el VectorizationEngineModule más adelante
     ],
     controllers: [
-        // Aquí pondremos el VectorizeDocumentController
+        VectorizeDocumentController
     ],
     providers: [
         // Casos de uso y repositorios inyectados con useFactory
