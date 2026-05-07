@@ -1,5 +1,5 @@
 import { Provider } from '@nestjs/common';
-import { VectorizeDocumentNestCommandHandler } from './VectorizeDocumentNestCommandHandler';
+import { VectorizeDocumentNestCommandHandler } from './CommandHandlers/VectorizeDocumentNestCommandHandler';
 import { VectorizeDocumentCommandHandler } from '@DocumentProcessing/VectorizationEngine/Application/VectorizeDocumentCommandHandler';
 import { VectorizeDocument } from '@DocumentProcessing/VectorizationEngine/Application/VectorizeDocument';
 
