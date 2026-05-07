@@ -1,38 +1,33 @@
 import { Module } from '@nestjs/common';
-import { CqrsModule } from '@nestjs/cqrs';
-import { VectorizeDocumentController } from './Controller/VectorizationEngine/VectorizationEnginePostController';
-import { VectorizeDocumentNestCommandHandler } from '@DocumentProcessing/VectorizationEngine/Infrastructure/VectorizeDocumentNestCommandHandler';
-import { VectorizeDocumentCommandHandler } from '@DocumentProcessing/VectorizationEngine/Application/VectorizeDocumentCommandHandler';
-import { VectorizeDocument } from '@DocumentProcessing/VectorizationEngine/Application/VectorizeDocument';
+import { VectorizationEngineModule } from './Controller/VectorizationEngine/VectorizationEngineModule';
 
-
+/**
+ * DocumentProcessingModule — Módulo Raíz (Root Module)
+ *
+ * ¿Para qué sirve?
+ * ────────────────
+ * Este es el punto de entrada de la aplicación NestJS. Su única
+ * responsabilidad es ORQUESTAR los módulos de característica (Feature Modules).
+ *
+ * Regla de oro: este archivo NUNCA debe registrar controladores ni providers
+ * directamente. Cada nueva funcionalidad debe vivir en su propio Feature Module.
+ *
+ * ¿Cómo añadir una nueva funcionalidad?
+ * ──────────────────────────────────────
+ * 1. Crea un nuevo Feature Module (ej. TextRecognitionModule).
+ * 2. Impórtalo aquí en el array `imports`.
+ * 3. ¡Listo! Este archivo no necesita ningún otro cambio.
+ */
 @Module({
     imports: [
-        CqrsModule
-    ],
-    controllers: [
-        VectorizeDocumentController
-    ],
-    providers: [
-        // 1. El Wrapper de NestJS (Infraestructura)
-        VectorizeDocumentNestCommandHandler,
+        // Encapsula todo lo relacionado con la vectorización de documentos:
+        // controlador HTTP, CommandHandler, y el caso de uso VectorizeDocument.
+        VectorizationEngineModule,
 
-        // 2. El Handler puro (Application) inyectado manualmente
-        {
-            provide: VectorizeDocumentCommandHandler,
-            useFactory: (useCase: VectorizeDocument) => {
-                return new VectorizeDocumentCommandHandler(useCase);
-            },
-            inject: [VectorizeDocument]
-        },
-
-        // 3. El Caso de Uso puro (Application) inyectado manualmente
-        {
-            provide: VectorizeDocument,
-            useFactory: () => {
-                return new VectorizeDocument(); // En el futuro inyectarás repositorios aquí
-            }
-        }
+        // Aquí irán los futuros módulos de característica, por ejemplo:
+        // TextRecognitionModule,
+        // DocumentSearchModule,
+        // DeleteDocumentModule,
     ],
 })
-export class DocumentProcessingModule { }
+export class DocumentProcessingModule {}
