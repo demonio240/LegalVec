@@ -6,11 +6,11 @@ const commonConfig = [
 ];
 
 module.exports = {
-  // Equivalente a la suite "courses" o "VectorizationEngine"
-  VectorizationEngine: [
+  // Equivalente a la suite "courses" o "VectorizedDocument"
+  VectorizedDocument: [
     ...commonConfig,
-    // paths: [ apps/mooc/backend/tests/features/VectorizationEngine ]
-    'apps/DocumentProcessing/backend/test/features/VectorizationEngine/**/*.feature', 
+    // paths: [ apps/DocumentProcessing/backend/test/features/VectorizedDocument ]
+    'apps/DocumentProcessing/backend/test/features/VectorizedDocument/**/*.feature', 
     
 
     // setup.steps.ts: Levanta el Kernel de Document Processing

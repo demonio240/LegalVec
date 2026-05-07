@@ -35,7 +35,7 @@ Sin `@Global()`, cada feature module tendría que importar `SharedInfrastructure
 ```typescript
 // ❌ Sin @Global() — hay que repetirlo en CADA módulo
 @Module({ imports: [CqrsModule, SharedInfrastructureModule] })
-export class VectorizationEngineModule {}
+export class VectorizedDocumentModule {}
 
 @Module({ imports: [CqrsModule, SharedInfrastructureModule] })
 export class TextRecognitionModule {}
@@ -49,13 +49,13 @@ Con `@Global()`, solo se registra una vez en el módulo raíz:
 ```typescript
 // ✅ Con @Global() — solo aquí, una vez
 @Module({
-    imports: [SharedInfrastructureModule, VectorizationEngineModule, ...]
+    imports: [SharedInfrastructureModule, VectorizedDocumentModule, ...]
 })
 export class DocumentProcessingModule {}
 
 // Los feature modules quedan limpios:
 @Module({ controllers: [...], providers: [...] })
-export class VectorizationEngineModule {}
+export class VectorizedDocumentModule {}
 ```
 
 ---
@@ -208,7 +208,7 @@ constructor(@Inject('Logger') private readonly logger: Logger) {}
 ```mermaid
 graph TD
     A["DocumentProcessingModule<br/>(módulo raíz)"] -->|importa| B["SharedInfrastructureModule<br/>(@Global)"]
-    A -->|importa| C["VectorizationEngineModule"]
+    A -->|importa| C["VectorizedDocumentModule"]
     A -->|importa| D["TextRecognitionModule<br/>(futuro)"]
 
     B -->|provee globalmente| E["CommandBus"]

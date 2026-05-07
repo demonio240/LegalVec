@@ -59,9 +59,9 @@ LegalVec/
 │   │       ├── src/
 │   │       │   ├── document-processing.module.ts    # Módulo raíz (orquestador)
 │   │       │   ├── Controller/
-│   │       │   │   └── VectorizationEngine/
-│   │       │   │       ├── VectorizationEngineModule.ts        # Feature Module
-│   │       │   │       └── VectorizationEnginePostController.ts
+│   │       │   │   └── VectorizedDocument/
+│   │       │   │       ├── VectorizedDocumentModule.ts         # Feature Module
+│   │       │   │       └── VectorizeDocumentPostController.ts
 │   │       │   └── Command/                 # Comandos CLI (futuro)
 │   │       └── test/
 │   │           └── features/                # Archivos .feature (Gherkin)
@@ -69,7 +69,7 @@ LegalVec/
 │
 ├── src/                                     # Código de negocio (framework-agnostic)
 │   ├── DocumentProcessing/                  # Bounded Context
-│   │   └── VectorizationEngine/             # Módulo/Aggregate
+│   │   └── VectorizedDocument/              # Módulo/Aggregate
 │   │       ├── Application/                 # Casos de uso + Command Handlers
 │   │       ├── Domain/                      # Entidades, Value Objects, interfaces
 │   │       └── Infrastructure/              # Implementaciones concretas + Providers
@@ -117,7 +117,7 @@ Contiene:
 - Errores de dominio
 
 ```typescript
-// src/DocumentProcessing/VectorizationEngine/Domain/
+// src/DocumentProcessing/VectorizedDocument/Domain/
 // Ejemplo: interfaces puras, sin decoradores de NestJS
 export interface DocumentRepository {
     save(document: Document): Promise<void>;
@@ -135,7 +135,7 @@ Contiene:
 - Casos de uso (Use Cases)
 
 ```typescript
-// src/DocumentProcessing/VectorizationEngine/Application/
+// src/DocumentProcessing/VectorizedDocument/Application/
 export class VectorizeDocumentCommandHandler {
     constructor(private readonly useCase: VectorizeDocument) {}
 
@@ -156,8 +156,8 @@ Contiene:
 - Clientes HTTP, colas de mensajes, etc.
 
 ```typescript
-// src/DocumentProcessing/VectorizationEngine/Infrastructure/
-export const VectorizationEngineProviders: Provider[] = [
+// src/DocumentProcessing/VectorizedDocument/Infrastructure/
+export const VectorizedDocumentProviders: Provider[] = [
     VectorizeDocumentNestCommandHandler,
     {
         provide: VectorizeDocumentCommandHandler,
@@ -187,7 +187,7 @@ export const VectorizationEngineProviders: Provider[] = [
 ```
 1. POST /vectorized-documents
        │
-2. VectorizationEnginePostController (apps/)
+2. VectorizeDocumentPostController (apps/)
        │ extends ApiController
        │ llama this.dispatch(command)
        │
@@ -300,7 +300,7 @@ constructor(@Inject('Logger') private readonly logger: Logger) {}
 Los tests de aceptación guían el desarrollo. Se escriben en Gherkin y verifican el comportamiento completo del sistema.
 
 ```gherkin
-# apps/DocumentProcessing/backend/test/features/VectorizationEngine/vectorize_document.feature
+# apps/DocumentProcessing/backend/test/features/VectorizedDocument/vectorize_document.feature
 Feature: Vectorize Document
 
   Scenario: Vectorize a valid document image
@@ -324,7 +324,7 @@ test/
 
 apps/DocumentProcessing/backend/test/
 ├── features/
-│   ├── VectorizationEngine/
+│   ├── VectorizedDocument/
 │   │   └── vectorize_document.feature
 │   └── setup.steps.ts              # BeforeAll: levanta la app NestJS para testing
 └── document_processing.cucumber.js # Configuración del perfil Cucumber
@@ -360,7 +360,7 @@ apps/DocumentProcessing/backend/src/Controller/TextRecognition/
 # apps/DocumentProcessing/backend/src/document-processing.module.ts
 imports: [
     SharedInfrastructureModule,
-    VectorizationEngineModule,
+    VectorizedDocumentModule,
     TextRecognitionModule,          // ← solo agregar esta línea
 ]
 ```
@@ -414,7 +414,7 @@ apps/Subscription/backend/
 # Ejecutar tests BDD (todos)
 npm run test:bdd
 
-# Ejecutar tests BDD solo de VectorizationEngine
+# Ejecutar tests BDD solo de VectorizedDocument
 npm run test:bdd:docs
 
 # Iniciar servidor de desarrollo

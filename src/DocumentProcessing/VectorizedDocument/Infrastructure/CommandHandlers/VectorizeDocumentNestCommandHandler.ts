@@ -1,8 +1,8 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { VectorizeDocumentCommand } from '@DocumentProcessing/VectorizationEngine/Application/VectorizeDocumentCommand';
-import { VectorizeDocumentCommandHandler } from '@DocumentProcessing/VectorizationEngine/Application/VectorizeDocumentCommandHandler';
+import { VectorizeDocumentCommand } from '@DocumentProcessing/VectorizedDocument/Application/VectorizeDocumentCommand';
+import { VectorizeDocumentCommandHandler } from '@DocumentProcessing/VectorizedDocument/Application/VectorizeDocumentCommandHandler';
 
-// Esta clase pertenece a la INFRAESTRUCTURA de tu módulo VectorizationEngine.
+// Esta clase pertenece a la INFRAESTRUCTURA de tu módulo VectorizedDocument.
 // Es un simple puente (proxy) que conecta el @nestjs/cqrs con tu capa pura de Application.
 @CommandHandler(VectorizeDocumentCommand)
 export class VectorizeDocumentNestCommandHandler implements ICommandHandler<VectorizeDocumentCommand> {

@@ -4,6 +4,7 @@
     "sourceRoot": "apps/DocumentProcessing/backend",
     "monorepo": true,
     "root": "apps/DocumentProcessing/backend",
+    "defaultProject": "document-processing-backend",
     "compilerOptions": {
         "webpack": true,
         "tsConfigPath": "tsconfig.json"

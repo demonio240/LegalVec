@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
-import { VectorizeDocumentPostController } from './VectorizationEnginePostController';
-import { VectorizationEngineProviders } from '@DocumentProcessing/VectorizationEngine/Infrastructure/VectorizationEngineProviders';
+import { VectorizeDocumentPostController } from './VectorizeDocumentPostController';
+import { VectorizedDocumentProviders } from '@DocumentProcessing/VectorizedDocument/Infrastructure/VectorizedDocumentProviders';
 
 /**
- * VectorizationEngineModule — Módulo de característica (Feature Module)
+ * VectorizedDocumentModule — Módulo de característica (Feature Module)
  *
  * ¿Por qué existe este archivo?
  * ─────────────────────────────
@@ -16,8 +16,8 @@ import { VectorizationEngineProviders } from '@DocumentProcessing/VectorizationE
  * ────────────────
  * Este módulo encapsula TODO lo relacionado con el caso de uso de vectorización
  * de documentos. Es el único responsable de:
- *  - Registrar el controlador HTTP de la VectorizationEngine.
- *  - Delegar la definición de providers a VectorizationEngineProviders.
+ *  - Registrar el controlador HTTP del VectorizedDocument.
+ *  - Delegar la definición de providers a VectorizedDocumentProviders.
  *
  * Siguiendo este patrón, añadir un nuevo caso de uso (ej. TextRecognition,
  * DeleteDocument) solo requiere crear un nuevo módulo de característica similar
@@ -29,7 +29,6 @@ import { VectorizationEngineProviders } from '@DocumentProcessing/VectorizationE
  */
 @Module({
     controllers: [VectorizeDocumentPostController],
-    providers: [...VectorizationEngineProviders],
+    providers: [...VectorizedDocumentProviders],
 })
-export class VectorizationEngineModule {}
-
+export class VectorizedDocumentModule {}

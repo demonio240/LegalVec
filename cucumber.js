@@ -24,7 +24,7 @@ module.exports = {
 
   // 2. Suites descentralizadas por Bounded Context
   // Al usar "..." (spread operator), estamos inyectando todas las suites
-  // (como VectorizationEngine, DocumentProcessing_all, etc) directamente aquí
+  // (como VectorizedDocument, DocumentProcessing_all, etc) directamente aquí
   ...documentProcessingSuites,
   ...subscriptionSuites
 };

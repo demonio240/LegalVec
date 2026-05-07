@@ -1,18 +1,18 @@
 import { Provider } from '@nestjs/common';
 import { VectorizeDocumentNestCommandHandler } from './CommandHandlers/VectorizeDocumentNestCommandHandler';
-import { VectorizeDocumentCommandHandler } from '@DocumentProcessing/VectorizationEngine/Application/VectorizeDocumentCommandHandler';
-import { VectorizeDocument } from '@DocumentProcessing/VectorizationEngine/Application/VectorizeDocument';
+import { VectorizeDocumentCommandHandler } from '@DocumentProcessing/VectorizedDocument/Application/VectorizeDocumentCommandHandler';
+import { VectorizeDocument } from '@DocumentProcessing/VectorizedDocument/Application/VectorizeDocument';
 
 /**
- * VectorizationEngineProviders
+ * VectorizedDocumentProviders
  *
- * Centraliza la definición de todos los providers del feature de VectorizationEngine.
- * Este array es consumido por el VectorizationEngineModule en apps/.
+ * Centraliza la definición de todos los providers del feature de VectorizedDocument.
+ * Este array es consumido por el VectorizedDocumentModule en apps/.
  *
  * Al crecer las dependencias (repositorios, servicios de IA, etc.), solo
  * este archivo cambia — el módulo raíz permanece limpio e intacto.
  */
-export const VectorizationEngineProviders: Provider[] = [
+export const VectorizedDocumentProviders: Provider[] = [
     // 1. Wrapper de Infraestructura: adapta el handler puro al sistema de
     //    NestJS/CQRS. Es el que el CommandBus encuentra y ejecuta.
     VectorizeDocumentNestCommandHandler,
