@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { SharedInfrastructureModule } from '@Shared/Infrastructure/NestJS/SharedInfrastructureModule';
 import { VectorizationEngineModule } from './Controller/VectorizationEngine/VectorizationEngineModule';
 
 /**
@@ -8,6 +9,10 @@ import { VectorizationEngineModule } from './Controller/VectorizationEngine/Vect
  * ────────────────
  * Este es el punto de entrada de la aplicación NestJS. Su única
  * responsabilidad es ORQUESTAR los módulos de característica (Feature Modules).
+ *
+ * SharedInfrastructureModule es @Global() — se importa aquí UNA sola vez y todos los
+ * feature modules reciben automáticamente CommandBus, QueryBus,
+ * ApiExceptionsHttpStatusCodeMapping, y cualquier servicio compartido futuro.
  *
  * Regla de oro: este archivo NUNCA debe registrar controladores ni providers
  * directamente. Cada nueva funcionalidad debe vivir en su propio Feature Module.
@@ -20,8 +25,11 @@ import { VectorizationEngineModule } from './Controller/VectorizationEngine/Vect
  */
 @Module({
     imports: [
-        // Encapsula todo lo relacionado con la vectorización de documentos:
-        // controlador HTTP, CommandHandler, y el caso de uso VectorizeDocument.
+        // Infraestructura compartida: CommandBus, QueryBus,
+        // ApiExceptionsHttpStatusCodeMapping, y futuros servicios globales.
+        SharedInfrastructureModule,
+
+        // Feature Modules:
         VectorizationEngineModule,
 
         // Aquí irán los futuros módulos de característica, por ejemplo:

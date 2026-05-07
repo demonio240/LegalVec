@@ -1,8 +1,6 @@
 import { Module } from '@nestjs/common';
-import { CqrsModule } from '@nestjs/cqrs';
 import { VectorizeDocumentPostController } from './VectorizationEnginePostController';
 import { VectorizationEngineProviders } from '@DocumentProcessing/VectorizationEngine/Infrastructure/VectorizationEngineProviders';
-import { ApiExceptionsHttpStatusCodeMapping } from '@Shared/Infrastructure/NestJS/ApiExceptionsHttpStatusCodeMapping';
 
 /**
  * VectorizationEngineModule — Módulo de característica (Feature Module)
@@ -30,9 +28,8 @@ import { ApiExceptionsHttpStatusCodeMapping } from '@Shared/Infrastructure/NestJ
  * https://docs.nestjs.com/modules#feature-modules
  */
 @Module({
-    imports: [CqrsModule],
     controllers: [VectorizeDocumentPostController],
-    providers: [...VectorizationEngineProviders, ApiExceptionsHttpStatusCodeMapping],
+    providers: [...VectorizationEngineProviders],
 })
 export class VectorizationEngineModule {}
 
