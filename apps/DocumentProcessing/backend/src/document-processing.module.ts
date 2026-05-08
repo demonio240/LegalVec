@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { SharedInfrastructureModule } from '@Shared/Infrastructure/NestJS/SharedInfrastructureModule';
-import { VectorizedDocumentModule } from './Controller/VectorizedDocument/VectorizedDocumentModule';
+import { VectorizerModule } from './Controller/Vectorizer/VectorizerModule';
 
 /**
  * DocumentProcessingModule — Módulo Raíz (Root Module)
@@ -30,7 +30,7 @@ import { VectorizedDocumentModule } from './Controller/VectorizedDocument/Vector
         SharedInfrastructureModule,
 
         // Feature Modules:
-        VectorizedDocumentModule,
+        VectorizerModule,
 
         // Aquí irán los futuros módulos de característica, por ejemplo:
         // TextRecognitionModule,

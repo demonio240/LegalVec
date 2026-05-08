@@ -2,10 +2,10 @@ import { Controller, Post, Body } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { ApiController } from '@Shared/Infrastructure/NestJS/ApiController';
 import { ApiExceptionsHttpStatusCodeMapping } from '@Shared/Infrastructure/NestJS/ApiExceptionsHttpStatusCodeMapping';
-import { VectorizeDocumentCommand } from '@DocumentProcessing/VectorizedDocument/Application/VectorizeDocumentCommand';
+import { VectorizeElementCommand } from '@DocumentProcessing/Vectorizer/Application/VectorizeElementCommand';
 
 @Controller('vectorized-documents')
-export class VectorizeDocumentPostController extends ApiController {
+export class VectorizeElementPostController extends ApiController {
     constructor(
         commandBus: CommandBus,
         queryBus: QueryBus,
@@ -16,14 +16,14 @@ export class VectorizeDocumentPostController extends ApiController {
 
     @Post()
     async run(@Body() body: any) {
-        await this.dispatch(new VectorizeDocumentCommand(body.documentId, body.text));
+        await this.dispatch(new VectorizeElementCommand(body.documentId, body.text));
         return { status: 'created' };
     }
 
     protected exceptions() {
         // Por ahora sin mapeos específicos — agregar aquí cuando existan
         // excepciones de dominio propias:
-        // Ejemplo: return [[DocumentNotFoundError, HttpStatus.NOT_FOUND]];
+        // Ejemplo: return [[ElementNotFoundError, HttpStatus.NOT_FOUND]];
         return [];
     }
 }
