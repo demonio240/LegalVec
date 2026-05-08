@@ -5,6 +5,12 @@ import { OptimizedSvg } from "@DocumentProcessing/Vectorizer/Domain/VO/Optimized
 import { ElementPrecision } from "@DocumentProcessing/Vectorizer/Domain/VO/Precision";
 import { ReductionRate } from "@DocumentProcessing/Vectorizer/Domain/VO/ReductionRate";
 import { ElementScale } from "@DocumentProcessing/Vectorizer/Domain/VO/Scale";
+import { ElementIdMother } from "./ElementIdMother";
+import { ImageMother } from "./ImageMother";
+import { ElementScaleMother } from "./ElementScaleMother";
+import { ElementPrecisionMother } from "./ElementPrecisionMother";
+import { OptimizedSvgMother } from "./OptimizedSvgMother";
+import { ReductionRateMother } from "./ReductionRateMother";
 
 export class ElementMother {
 
@@ -17,12 +23,12 @@ export class ElementMother {
         reductionRate?: ReductionRate;
     }): Element {
         return Element.create(
-            params?.id ?? new ElementId("f47ac10b-58cc-4372-a567-0e02b2c3d479"),
-            params?.image ?? new Image("base64string"),
-            params?.scale ?? new ElementScale(1),
-            params?.precision ?? new ElementPrecision(50),
-            params?.optimizedSvg ?? new OptimizedSvg("<svg></svg>"),
-            params?.reductionRate ?? new ReductionRate(0.5)
+            params?.id ?? ElementIdMother.create(),
+            params?.image ?? ImageMother.create(),
+            params?.scale ?? ElementScaleMother.create(1),
+            params?.precision ?? ElementPrecisionMother.create(),
+            params?.optimizedSvg ?? OptimizedSvgMother.create(),
+            params?.reductionRate ?? ReductionRateMother.create(),
         );
     }
 
