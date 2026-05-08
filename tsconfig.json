@@ -14,6 +14,7 @@
         "baseUrl": "./",
         // 🆕 2. Solución al error TS5101: Silenciamos la advertencia del futuro TypeScript 7.0
         "ignoreDeprecations": "6.0",
+        "types": ["jest"],
         "paths": {
             "@DocumentProcessing/*": [
                 "src/DocumentProcessing/*"
