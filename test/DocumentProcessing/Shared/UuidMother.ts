@@ -1,4 +1,4 @@
-import { MotherCreator } from "./MotherCreator";
+import { MotherCreator } from "../../DocumentProcessing/Shared/MotherCreator";
 
 export class UuidMother {
 

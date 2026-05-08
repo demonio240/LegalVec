@@ -1,5 +1,5 @@
 import { ElementPrecision } from "@DocumentProcessing/Vectorizer/Domain/VO/Precision";
-import { MotherCreator } from "test/Shared/Domain/MotherCreator";
+import { MotherCreator } from "test/DocumentProcessing/Shared/MotherCreator";
 
 export class ElementPrecisionMother {
     static create(value?: number): ElementPrecision {

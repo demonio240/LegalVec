@@ -1,5 +1,3 @@
-import { VectorizeElementCommand } from './VectorizeElementCommandMother';
-import { VectorizerCreatedDomainEventMother } from './VectorizerCreatedDomainEventMother';
 import { VectorizeElementCommandHandler } from '@DocumentProcessing/Vectorizer/Application/VectorizeElementCommandHandler';
 import { VectorizerModuleUnitTestCase } from '../VectorizerModuleUnitTestCase';
 import { VectorizeElement } from '@DocumentProcessing/Vectorizer/Application/VectorizeElement';
@@ -22,7 +20,7 @@ describe('VectorizeElementCommandHandlerTest', () => {
         // Inicializamos el handler inyectando los mocks que provee la clase base
         const creator = new VectorizeElement(
             unitTestCase.repository(),
-            unitTestCase.eventBus()
+            //unitTestCase.eventBus()
         );
 
         handler = new VectorizeElementCommandHandler(creator);
@@ -32,7 +30,7 @@ describe('VectorizeElementCommandHandlerTest', () => {
     it('should vectorize a valid element', async () => {
         // GIVEN
         const command = VectorizeElementCommandMother.create();
-        const element = ElementMother.create(command);
+        const element = ElementMother.fromCommand(command);
         //const domainEvent = VectorizerCreatedDomainEventMother.fromElement(element);
 
         // WHEN (Expectativas/Mocks)

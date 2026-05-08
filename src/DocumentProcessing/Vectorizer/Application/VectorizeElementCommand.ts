@@ -1,3 +1,5 @@
+import { Command } from '@Shared/Domain/Bus/Command/Command';
+
 export class VectorizeElementCommand implements Command {
     constructor(
         public elementId: string,

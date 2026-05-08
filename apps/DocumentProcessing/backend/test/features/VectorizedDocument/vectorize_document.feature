@@ -9,7 +9,10 @@ Feature: Vectorize a document
       {
         "documentId": "123e4567-e89b-12d3-a456-426614174000",
         "imageUrl": "https://bucket.legalvec.com/docs/contract_1.jpg",
-        "level": "high_fidelity"
+        "scale": 1.0,
+        "precision": 2,
+        "optimizedSvg": "<svg viewBox='0 0 100 100'></svg>",
+        "reductionRate": 0.5
       }
       """
     Then the response status code should be 201

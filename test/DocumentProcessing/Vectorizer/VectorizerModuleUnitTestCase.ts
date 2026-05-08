@@ -1,21 +1,21 @@
 import { UnitTestCase } from "test/Shared/Infrastructure/Jest/UnitTestCase";
-import { VectorizedElement } from "../../../src/DocumentProcessing/Vectorizer/Domain/Element";
-import { VectorizerRepository } from "../../../src/DocumentProcessing/Vectorizer/Domain/ElementRepository";
+import { ElementRepository } from "../../../src/DocumentProcessing/Vectorizer/Domain/ElementRepository";
 import { mock } from "jest-mock-extended";
+import { Element } from "@DocumentProcessing/Vectorizer/Domain/Element";
 
 export class VectorizerModuleUnitTestCase extends UnitTestCase {
-    private repositoryMock: VectorizerRepository;
+    private repositoryMock!: ElementRepository;
 
     setUp(): void {
         super.setUp();
-        this.repositoryMock = this.mock<VectorizerRepository>();
+        this.repositoryMock = this.mock<ElementRepository>();
     }
 
     repository() {
         return this.repositoryMock;
     }
 
-    shouldSave(elementVectorized: VectorizedElement) {
+    shouldSave(elementVectorized: Element) {
         this.repository().save(elementVectorized);
     }
 

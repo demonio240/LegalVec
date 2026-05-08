@@ -1,17 +1,17 @@
 import { Element } from "../Domain/Element";
-import { VectorizerRepository } from "../Domain/ElementRepository";
-import { EventBus } from "test/Shared/Infrastructure/Jest/UnitTestCase"; // Nota: Esto luego irá a su sitio en Shared
-import { ElementId } from "../Domain/VO/ElementId";
+//import { EventBus } from "test/Shared/Infrastructure/Jest/UnitTestCase"; // Nota: Esto luego irá a su sitio en Shared
+import { ElementId } from "../../Shared/Domain/Vectorizer/ElementId";
 import { Image } from "../Domain/VO/Image";
 import { ElementScale } from "../Domain/VO/Scale";
 import { ElementPrecision } from "../Domain/VO/Precision";
 import { OptimizedSvg } from "../Domain/VO/OptimizedSvg";
 import { ReductionRate } from "../Domain/VO/ReductionRate";
+import { ElementRepository } from "../Domain/ElementRepository";
 
 export class VectorizeElement {
     constructor(
-        private repository: VectorizerRepository,
-        private eventBus: EventBus
+        private repository: ElementRepository,
+        //  private eventBus: EventBus
     ) { }
 
     async run(id: ElementId, image: Image, scale: ElementScale, precision: ElementPrecision, optimizedSvg: OptimizedSvg, reductionRate: ReductionRate): Promise<void> {

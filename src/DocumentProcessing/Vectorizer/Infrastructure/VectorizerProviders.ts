@@ -2,6 +2,8 @@ import { Provider } from '@nestjs/common';
 import { VectorizeElementNestCommandHandler } from './CommandHandlers/VectorizeElementNestCommandHandler';
 import { VectorizeElementCommandHandler } from '@DocumentProcessing/Vectorizer/Application/VectorizeElementCommandHandler';
 import { VectorizeElement } from '@DocumentProcessing/Vectorizer/Application/VectorizeElement';
+import { ElementRepository, VECTORIZER_REPOSITORY } from '../Domain/ElementRepository';
+import { InMemoryElementRepository } from './Persistence/InMemoryElementRepository';
 
 /**
  * VectorizerProviders
@@ -33,8 +35,18 @@ export const VectorizerProviders: Provider[] = [
     //    como dependencias (ej. useFactory: (repo: IElementRepository) => ...).
     {
         provide: VectorizeElement,
-        useFactory: () => {
-            return new VectorizeElement();
+        //useClass: La clase que vaya a implementar
+        useFactory: (repository: ElementRepository) => {
+            return new VectorizeElement(repository);
         },
+        inject: [VECTORIZER_REPOSITORY]
+    },
+
+    {
+        provide: VECTORIZER_REPOSITORY,
+
+        useFactory: () => {
+            return new InMemoryElementRepository()
+        }
     },
 ];

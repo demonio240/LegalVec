@@ -1,5 +1,5 @@
 import { Element } from "@DocumentProcessing/Vectorizer/Domain/Element";
-import { ElementId } from "@DocumentProcessing/Vectorizer/Domain/VO/ElementId";
+import { ElementId } from "@DocumentProcessing/Shared/Domain/Vectorizer/ElementId";
 import { Image } from "@DocumentProcessing/Vectorizer/Domain/VO/Image";
 import { OptimizedSvg } from "@DocumentProcessing/Vectorizer/Domain/VO/OptimizedSvg";
 import { ElementPrecision } from "@DocumentProcessing/Vectorizer/Domain/VO/Precision";

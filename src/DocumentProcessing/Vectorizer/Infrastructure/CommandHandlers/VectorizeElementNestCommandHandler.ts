@@ -6,10 +6,10 @@ import { VectorizeElementCommandHandler } from '@DocumentProcessing/Vectorizer/A
 // Es un simple puente (proxy) que conecta el @nestjs/cqrs con tu capa pura de Application.
 @CommandHandler(VectorizeElementCommand)
 export class VectorizeElementNestCommandHandler implements ICommandHandler<VectorizeElementCommand> {
-    constructor(private readonly pureHandler: VectorizeElementCommandHandler) {}
+    constructor(private readonly pureHandler: VectorizeElementCommandHandler) { }
 
     async execute(command: VectorizeElementCommand): Promise<void> {
         // Le delegamos la ejecución al handler puro de tu dominio
-        await this.pureHandler.handle(command);
+        await this.pureHandler.execute(command);
     }
 }

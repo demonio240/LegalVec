@@ -1,4 +1,4 @@
-import { ElementId } from "./VO/ElementId";
+import { ElementId } from "../../Shared/Domain/Vectorizer/ElementId";
 import { ElementScale } from "./VO/Scale";
 import { ElementPrecision } from "./VO/Precision";
 import { Image } from "./VO/Image";

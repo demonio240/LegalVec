@@ -1,5 +1,7 @@
-import { VectorizedElement } from "./Element";
+import { Element } from "./Element";
 
-export interface VectorizerRepository {
-    save(document: VectorizedElement): Promise<void>;
+export const VECTORIZER_REPOSITORY = Symbol('ElementRepository');
+
+export interface ElementRepository {
+    save(document: Element): Promise<void>;
 }

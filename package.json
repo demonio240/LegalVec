@@ -11,7 +11,7 @@
     "start:doc-engine": "nest start document-processing-backend --exec \"node dist/apps/DocumentProcessing/backend/public/index.js\"",
     "console:docs": "ts-node -r tsconfig-paths/register apps/DocumentProcessing/backend/bin/console.ts",
     "test:bdd": "cucumber-js",
-    "test:bdd:docs": "cucumber-js -p Vectorizer",
+    "test:bdd:docs": "cucumber-js -p VectorizedDocument",
     "test:bdd:subs": "cucumber-js -p subscriptions",
     "test:unit": "jest"
   },

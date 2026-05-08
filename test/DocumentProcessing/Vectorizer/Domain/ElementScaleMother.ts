@@ -1,5 +1,5 @@
 import { ElementScale } from "@DocumentProcessing/Vectorizer/Domain/VO/Scale";
-import { MotherCreator } from "test/Shared/Domain/MotherCreator";
+import { MotherCreator } from "test/DocumentProcessing/Shared/MotherCreator";
 
 export class ElementScaleMother {
     static create(value?: number): ElementScale {

@@ -16,7 +16,16 @@ export class VectorizeElementPostController extends ApiController {
 
     @Post()
     async run(@Body() body: any) {
-        await this.dispatch(new VectorizeElementCommand(body.documentId, body.text));
+        await this.dispatch(
+            new VectorizeElementCommand(
+                body.documentId,
+                body.imageUrl,
+                body.scale,
+                body.precision,
+                body.optimizedSvg,
+                body.reductionRate
+            )
+        );
         return { status: 'created' };
     }
 
