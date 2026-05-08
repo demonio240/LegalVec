@@ -11,6 +11,7 @@ import { ElementScaleMother } from "./ElementScaleMother";
 import { ElementPrecisionMother } from "./ElementPrecisionMother";
 import { OptimizedSvgMother } from "./OptimizedSvgMother";
 import { ReductionRateMother } from "./ReductionRateMother";
+import { VectorizeElementCommand } from "@DocumentProcessing/Vectorizer/Application/VectorizeElementCommand";
 
 export class ElementMother {
 
