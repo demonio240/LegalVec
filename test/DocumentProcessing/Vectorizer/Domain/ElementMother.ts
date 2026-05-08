@@ -31,5 +31,14 @@ export class ElementMother {
             params?.reductionRate ?? ReductionRateMother.create(),
         );
     }
-
+    static fromCommand(command: VectorizeElementCommand): Element {
+        return this.create({
+            id: ElementIdMother.create({ value: command.getElementId() }),
+            image: ImageMother.create(command.getImage()),
+            scale: ElementScaleMother.create(command.getScale()),
+            precision: ElementPrecisionMother.create(command.getPrecision()),
+            optimizedSvg: OptimizedSvgMother.create(command.getOptimizedSvg()),
+            reductionRate: ReductionRateMother.create(command.getReductionRate())
+        });
+    }
 }
