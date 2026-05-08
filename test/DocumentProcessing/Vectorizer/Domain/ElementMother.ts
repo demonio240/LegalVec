@@ -7,6 +7,7 @@ import { ReductionRate } from "@DocumentProcessing/Vectorizer/Domain/VO/Reductio
 import { ElementScale } from "@DocumentProcessing/Vectorizer/Domain/VO/Scale";
 
 export class ElementMother {
+
     static create(params?: {
         id?: ElementId;
         image?: Image;
