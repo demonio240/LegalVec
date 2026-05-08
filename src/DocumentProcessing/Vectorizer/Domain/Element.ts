@@ -1,26 +1,39 @@
+import { ElementId } from "./VO/ElementId";
+import { ElementScale } from "./VO/Scale";
+import { ElementPrecision } from "./VO/Precision";
+import { Image } from "./VO/Image";
+import { OptimizedSvg } from "./VO/OptimizedSvg";
+import { ReductionRate } from "./VO/ReductionRate";
+
 export class Element {
+
+    //id: string, image: string, scale: number, precision: number
     constructor(
-        public readonly id: string,
-        public readonly rawSvg: string,
-        public readonly optimizedSvg: string,
-        public readonly reductionRate: number,
-        public readonly scale: number
+        public readonly id: ElementId,
+        public readonly image: Image,
+        public readonly scale: ElementScale,
+        public readonly precision: ElementPrecision,
+        public readonly optimizedSvg: OptimizedSvg,
+        public readonly reductionRate: ReductionRate
     ) { }
 
-    static create(params: {
-        id: string;
-        rawSvg: string;
-        optimizedSvg: string;
-        reductionRate: number;
-        scale: number;
-    }): Element {
+    static create(
+        id: ElementId,
+        image: Image,
+        scale: ElementScale,
+        precision: ElementPrecision,
+        optimizedSvg: OptimizedSvg,
+        reductionRate: ReductionRate
+    ): Element {
         return new Element(
-            params.id,
-            params.rawSvg,
-            params.optimizedSvg,
-            params.reductionRate,
-            params.scale
+            id,
+            image,
+            scale,
+            precision,
+            optimizedSvg,
+            reductionRate
         );
     }
+
 
 }

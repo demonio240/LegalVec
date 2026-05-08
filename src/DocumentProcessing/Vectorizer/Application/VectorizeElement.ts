@@ -14,10 +14,9 @@ export class VectorizeElement {
         // 2. Por ahora, para que el test compile y pase (TDD), creamos el elemento
         const element = Element.create({
             id,
-            rawSvg: "<svg>...</svg>",
-            optimizedSvg: "<svg>optimized</svg>",
-            reductionRate: 0.5,
-            scale
+            image,
+            scale,
+            precision
         });
 
         // 3. Guardamos y publicamos

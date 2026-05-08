@@ -3,8 +3,8 @@ import { VectorizerCreatedDomainEventMother } from './VectorizerCreatedDomainEve
 import { VectorizeElementCommandHandler } from '@DocumentProcessing/Vectorizer/Application/VectorizeElementCommandHandler';
 import { VectorizerModuleUnitTestCase } from '../VectorizerModuleUnitTestCase';
 import { VectorizeElement } from '@DocumentProcessing/Vectorizer/Application/VectorizeElement';
+import { ElementMother } from '../Domain/ElementMother';
 import { VectorizeElementCommandMother } from './VectorizeElementCommandMother';
-import { ElementMother } from '@DocumentProcessing/Vectorizer/Domain/Element';
 
 describe('VectorizeElementCommandHandlerTest', () => {
     // 1. Definimos las variables en el scope del describe
