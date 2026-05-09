@@ -17,7 +17,7 @@ describe('VectorizeElementCommandHandlerTest', () => {
         // Llamamos a su setup (que internamente hará el super.setUp() si es necesario)
         unitTestCase.setUp();
 
-        // Inicializamos el handler inyectando los mocks que provee la clase base
+        // Inicializamos el use case inyectando los mocks que provee la clase base
         const creator = new VectorizeElement(
             unitTestCase.repository(),
             //unitTestCase.eventBus()
@@ -31,18 +31,11 @@ describe('VectorizeElementCommandHandlerTest', () => {
         // GIVEN
         const command = VectorizeElementCommandMother.create();
         const element = ElementMother.fromCommand(command);
-        //const domainEvent = VectorizerCreatedDomainEventMother.fromElement(element);
 
-        // WHEN (Expectativas/Mocks)
-        // Usamos los métodos auxiliares de tu clase base (deben estar definidos allí)
-        unitTestCase.shouldSave(element);
-        //unitTestCase.shouldPublishDomainEvent(domainEvent);
-
-        // THEN (Acción)
-        // En NestJS/TS los handlers suelen ser asíncronos (retornan Promise)
+        // WHEN (Acción)
         await handler.execute(command);
 
-        // Si tu clase base tiene el método dispatch como en PHP:
-        // await unitTestCase.dispatch(command, handler);
+        // THEN (Verificación)
+        unitTestCase.assertLastSavedElementIs(element);
     });
 });

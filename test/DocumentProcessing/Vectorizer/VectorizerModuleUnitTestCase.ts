@@ -15,8 +15,8 @@ export class VectorizerModuleUnitTestCase extends UnitTestCase {
         return this.repositoryMock;
     }
 
-    shouldSave(elementVectorized: Element) {
-        this.repository().save(elementVectorized);
+    assertLastSavedElementIs(expectedElement: Element): void {
+        expect(this.repositoryMock.save).toHaveBeenCalledWith(expectedElement);
     }
 
 
