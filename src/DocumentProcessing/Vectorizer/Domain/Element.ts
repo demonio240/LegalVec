@@ -4,8 +4,9 @@ import { ElementPrecision } from "./VO/Precision";
 import { Image } from "./VO/Image";
 import { OptimizedSvg } from "./VO/OptimizedSvg";
 import { ReductionRate } from "./VO/ReductionRate";
+import { AggregateRoot } from "@Shared/Domain/Aggregate/AggregateRoot";
 
-export class Element {
+export class Element extends AggregateRoot {
 
     //id: string, image: string, scale: number, precision: number
     constructor(
@@ -15,7 +16,9 @@ export class Element {
         public readonly precision: ElementPrecision,
         public readonly optimizedSvg: OptimizedSvg,
         public readonly reductionRate: ReductionRate
-    ) { }
+    ) {
+        super();
+    }
 
     static create(
         id: ElementId,
