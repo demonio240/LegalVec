@@ -49,5 +49,57 @@ describe('VectorizeElementCommandHandlerTest', () => {
         // THEN (Verificación)
         unitTestCase.assertLastSavedElementIs(element);
     });
+
+    it('should throw an exception when scale is invalid', async () => {
+        // GIVEN
+        const invalidScale = -1; // Supongamos que no permitimos escalas negativas
+        const command = VectorizeElementCommandMother.create({ scale: invalidScale });
+
+        // WHEN (Acción) & THEN (Verificación del error)
+        // Usamos unitTestCase.assertAskThrowsException o el expect de Jest directamente
+        await expect(handler.execute(command)).rejects.toThrow("Scale must be a positive number");
+
+        // ADEMÁS: Verificamos que NUNCA se llamó al repositorio (muy importante)
+        unitTestCase.assertNotSave(); 
+
+    })
+
+    it('should throw an exception when precision is out of range', async () => {
+        // GIVEN (Precisión 10 está fuera del rango 1-5)
+        const command = VectorizeElementCommandMother.create({ precision: 10 });
+
+        // WHEN & THEN
+        await expect(handler.execute(command))
+            .rejects
+            .toThrow("Precision must be between 1 and 5");
+
+        unitTestCase.assertNotSave();
+    });
+
+    it('should throw an exception when image is empty', async () => {
+        // GIVEN
+        const command = VectorizeElementCommandMother.create({ image: "" });
+
+        // WHEN & THEN
+        await expect(handler.execute(command))
+            .rejects
+            .toThrow("Image cannot be empty");
+
+        unitTestCase.assertNotSave();
+    });
+
+    it('should throw an exception when image format is invalid', async () => {
+        // GIVEN
+        const command = VectorizeElementCommandMother.create({ image: "invalid_format" });
+
+        // WHEN & THEN
+        await expect(handler.execute(command))
+            .rejects
+            .toThrow("Invalid image format. Must be a Data URI or a valid URL");
+
+        unitTestCase.assertNotSave();
+    });
+
+
 });
 

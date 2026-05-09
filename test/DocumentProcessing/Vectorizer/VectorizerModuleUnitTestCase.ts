@@ -41,5 +41,9 @@ export class VectorizerModuleUnitTestCase extends UnitTestCase {
     assertLastSavedElementIs(expectedElement: Element): void {
         expect(this.repositoryMock.save).toHaveBeenCalledWith(expectedElement);
     }
+
+    assertNotSave(): void {
+    expect(this.repositoryMock.save).not.toHaveBeenCalled();
+}
 }
 
