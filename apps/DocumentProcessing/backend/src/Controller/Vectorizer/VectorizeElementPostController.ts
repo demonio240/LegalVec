@@ -21,9 +21,7 @@ export class VectorizeElementPostController extends ApiController {
                 body.documentId,
                 body.imageUrl,
                 body.scale,
-                body.precision,
-                body.optimizedSvg,
-                body.reductionRate
+                body.precision
             )
         );
         return { status: 'created' };

@@ -1,3 +1,4 @@
+import { MockProxy } from 'jest-mock-extended';
 import { UnitTestCase } from "test/Shared/Infrastructure/Jest/UnitTestCase";
 import { ElementRepository } from "../../../src/DocumentProcessing/Vectorizer/Domain/ElementRepository";
 import { Element } from "@DocumentProcessing/Vectorizer/Domain/Element";
@@ -8,9 +9,9 @@ import { ImageVectorizerService } from "../../../src/DocumentProcessing/Vectoriz
 import { OptmizeSvgService } from "../../../src/DocumentProcessing/Vectorizer/Domain/Services/OptmizeSvgService";
 
 export class VectorizerModuleUnitTestCase extends UnitTestCase {
-    private repositoryMock!: ElementRepository;
-    private tracerMock!: ImageTracerEngine;
-    private optimizerMock!: SvgOptimizerEngine;
+    private repositoryMock!: MockProxy<ElementRepository>;
+    private tracerMock!: MockProxy<ImageTracerEngine>;
+    private optimizerMock!: MockProxy<SvgOptimizerEngine>;
 
     setUp(): void {
         super.setUp();

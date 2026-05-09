@@ -11,6 +11,6 @@ export class InMemoryElementRepository implements ElementRepository {
         this.elements.push(element);
 
         // Opcional: log para ver que está funcionando durante el desarrollo
-        console.log(`[InMemoryRepository] Elemento guardado con ID: ${element.id.value}`);
+        console.log(`[InMemoryRepository] Elemento guardado con ID: ${element.id.value()}`);
     }
 }

@@ -10,6 +10,7 @@ Sistema de procesamiento inteligente de documentos legales construido con **Nest
 - [Bounded Contexts](#bounded-contexts)
 - [Shared Kernel](#shared-kernel)
 - [Inyección de Dependencias y Flexibilidad](#inyección-de-dependencias-y-flexibilidad)
+- [Pipeline de Vectorización](#pipeline-de-vectorización)
 - [Testing](#testing)
 - [Cómo Agregar Funcionalidades](#cómo-agregar-funcionalidades)
 - [Comandos](#comandos)
@@ -290,6 +291,29 @@ constructor(@Inject('Logger') private readonly logger: Logger) {}
 | Implementaciones de interfaces | ✅ Sí, con `useClass` | `WinstonLogger` |
 
 > **Resultado práctico:** Aunque `Shared/` crezca a 50+ archivos, el módulo solo tendrá ~6-10 líneas de providers.
+
+---
+
+## Pipeline de Vectorización (Patrón Pipeline)
+
+El sistema utiliza un **Pipeline de Vectorización** desacoplado para procesar imágenes. Este pipeline sigue un patrón donde cada paso es un servicio de dominio independiente coordinado de forma secuencial.
+
+### Configuración Estática vía DI
+
+Para mantener el dominio limpio de configuraciones de infraestructura, utilizamos un proveedor especial llamado `PIPELINE_SETUP` en `VectorizerProviders.ts`.
+
+#### ¿Cómo funciona el flujo de inyección?
+
+1.  **Definición de Motores**: Se definen tokens para los motores técnicos (`IMAGE_TRACER_ENGINE`, `SVG_OPTIMIZER_ENGINE`). Estos motores son las implementaciones reales que interactúan con herramientas externas.
+2.  **Inyección y Orquestación**: El proveedor `PIPELINE_SETUP` utiliza una `useFactory` que:
+    *   **Inyecta**: Recupera los motores mediante el array `inject`.
+    *   **Envuelve**: Crea los servicios de dominio (`ImageVectorizerService`, `OptmizeSvgService`) inyectándoles los motores técnicos.
+    *   **Configura**: Registra estos servicios en la clase estática `VectorizationPipeline`.
+3.  **Control del Ciclo de Vida**: El Caso de Uso `VectorizeElement` tiene en su `inject` la dependencia de `'PIPELINE_SETUP'`. 
+    *   Esto actúa como un "trigger": NestJS no puede instanciar el caso de uso sin antes haber resuelto (y por tanto ejecutado) la configuración del pipeline.
+    *   **Resultado**: Garantizamos que el pipeline siempre esté listo y configurado antes de su primer uso, sin ensuciar el constructor del caso de uso con dependencias que no utiliza directamente.
+
+Este patrón permite que el Pipeline sea accesible de forma estática en el dominio pero configurable de forma dinámica desde la infraestructura.
 
 ---
 
