@@ -16,9 +16,8 @@ export class VectorizeElementCommandHandler {
             new ElementId(command.elementId),
             new Image(command.image),
             new ElementScale(command.scale),
-            new ElementPrecision(command.precision),
-            new OptimizedSvg(command.optimizedSvg),
-            new ReductionRate(command.reductionRate)
+            new ElementPrecision(command.precision)
         );
     }
 }
+

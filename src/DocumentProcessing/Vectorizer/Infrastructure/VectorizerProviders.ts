@@ -4,24 +4,15 @@ import { VectorizeElementCommandHandler } from '@DocumentProcessing/Vectorizer/A
 import { VectorizeElement } from '@DocumentProcessing/Vectorizer/Application/VectorizeElement';
 import { ElementRepository, VECTORIZER_REPOSITORY } from '../Domain/ElementRepository';
 import { InMemoryElementRepository } from './Persistence/InMemoryElementRepository';
+import { IMAGE_TRACER_ENGINE, ImageTracerEngine } from '../Domain/Contracts/ImageTracer';
+import { SVG_OPTIMIZER_ENGINE, SvgOptimizerEngine } from '../Domain/Contracts/SvgOptimizer';
+import { ImageVectorizerService } from '../Domain/Services/ImageVectorizerService';
+import { OptmizeSvgService } from '../Domain/Services/OptmizeSvgService';
+import { VectorizationPipeline } from '../Domain/Pipeline/VectorizationPipeline';
 
-/**
- * VectorizerProviders
- *
- * Centraliza la definición de todos los providers del feature de Vectorizer.
- * Este array es consumido por el VectorizerModule en apps/.
- *
- * Al crecer las dependencias (repositorios, servicios de IA, etc.), solo
- * este archivo cambia — el módulo raíz permanece limpio e intacto.
- */
 export const VectorizerProviders: Provider[] = [
-    // 1. Wrapper de Infraestructura: adapta el handler puro al sistema de
-    //    NestJS/CQRS. Es el que el CommandBus encuentra y ejecuta.
     VectorizeElementNestCommandHandler,
 
-    // 2. Handler de Aplicación: contiene la lógica de orquestación pura,
-    //    sin depender del framework. Se instancia manualmente con useFactory
-    //    para mantener el desacoplamiento con NestJS.
     {
         provide: VectorizeElementCommandHandler,
         useFactory: (useCase: VectorizeElement) => {
@@ -30,23 +21,39 @@ export const VectorizerProviders: Provider[] = [
         inject: [VectorizeElement],
     },
 
-    // 3. Caso de Uso puro de Aplicación: contiene la lógica de negocio.
-    //    En el futuro, aquí se inyectarán repositorios o servicios de IA
-    //    como dependencias (ej. useFactory: (repo: IElementRepository) => ...).
+    // Configuración del Pipeline Estático al arrancar
+    {
+        provide: 'PIPELINE_SETUP',
+        useFactory: (tracer: ImageTracerEngine, optimizer: SvgOptimizerEngine) => {
+            VectorizationPipeline.configure([
+                new ImageVectorizerService(tracer),
+                new OptmizeSvgService(optimizer)
+            ]);
+            return true;
+        },
+        inject: [IMAGE_TRACER_ENGINE, SVG_OPTIMIZER_ENGINE]
+    },
+
     {
         provide: VectorizeElement,
-        //useClass: La clase que vaya a implementar
         useFactory: (repository: ElementRepository) => {
             return new VectorizeElement(repository);
         },
-        inject: [VECTORIZER_REPOSITORY]
+        inject: [VECTORIZER_REPOSITORY, 'PIPELINE_SETUP']
     },
 
     {
         provide: VECTORIZER_REPOSITORY,
-
-        useFactory: () => {
-            return new InMemoryElementRepository()
-        }
+        useClass: InMemoryElementRepository
     },
+
+    // Motores técnicos (Placeholders por ahora)
+    {
+        provide: IMAGE_TRACER_ENGINE,
+        useValue: { trace: async () => "<svg>...</svg>" }
+    },
+    {
+        provide: SVG_OPTIMIZER_ENGINE,
+        useValue: { optimize: async (svg: string) => ({ svg, reductionRate: 0.1 }) }
+    }
 ];

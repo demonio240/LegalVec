@@ -27,10 +27,14 @@ describe('VectorizeElementCommandHandlerTest', () => {
     });
 
     // 3. El test propiamente dicho
-    it('should vectorize a valid element', async () => {
+    it('should save a valid element', async () => {
         // GIVEN
         const command = VectorizeElementCommandMother.create();
         const element = ElementMother.fromCommand(command);
+
+        // Configuramos el comportamiento de los motores para que coincida con lo esperado
+        unitTestCase.shouldTrace(element.optimizedSvg.value);
+        unitTestCase.shouldOptimize(element.optimizedSvg.value, element.reductionRate.value);
 
         // WHEN (Acción)
         await handler.execute(command);
@@ -39,3 +43,4 @@ describe('VectorizeElementCommandHandlerTest', () => {
         unitTestCase.assertLastSavedElementIs(element);
     });
 });
+
