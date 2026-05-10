@@ -32,6 +32,7 @@ export class ElementMother {
             params?.reductionRate ?? ReductionRateMother.create(),
         );
     }
+
     static fromCommand(
         command: VectorizeElementCommand,
         results: { optimizedSvg: string; reductionRate: number }

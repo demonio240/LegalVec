@@ -23,23 +23,22 @@ export const VectorizerProviders: Provider[] = [
 
     // Configuración del Pipeline Estático al arrancar
     {
-        provide: 'PIPELINE_SETUP',
+        provide: VectorizationPipeline,
         useFactory: (tracer: ImageTracerEngine, optimizer: SvgOptimizerEngine) => {
-            VectorizationPipeline.configure([
+            return new VectorizationPipeline([
                 new ImageVectorizerService(tracer),
                 new OptmizeSvgService(optimizer)
             ]);
-            return true;
         },
         inject: [IMAGE_TRACER_ENGINE, SVG_OPTIMIZER_ENGINE]
     },
 
     {
         provide: VectorizeElement,
-        useFactory: (repository: ElementRepository) => {
-            return new VectorizeElement(repository);
+        useFactory: (repository: ElementRepository, pipeline: VectorizationPipeline) => {
+            return new VectorizeElement(repository, pipeline); // <- Pasamos el pipeline
         },
-        inject: [VECTORIZER_REPOSITORY, 'PIPELINE_SETUP']
+        inject: [VECTORIZER_REPOSITORY, VectorizationPipeline]
     },
 
     {

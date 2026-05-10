@@ -14,6 +14,7 @@ export class VectorizeElementPostController extends ApiController {
         super(commandBus, queryBus, exceptionHandler);
     }
 
+    //cambiar el nombre de body a request
     @Post()
     async run(@Body() body: any) {
         await this.dispatch(

@@ -11,8 +11,6 @@ Feature: Vectorize a document
         "imageUrl": "https://bucket.legalvec.com/docs/contract_1.jpg",
         "scale": 1.0,
         "precision": 2,
-        "optimizedSvg": "<svg viewBox='0 0 100 100'></svg>",
-        "reductionRate": 0.5
       }
       """
     Then the response status code should be 201

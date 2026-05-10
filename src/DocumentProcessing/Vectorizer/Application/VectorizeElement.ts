@@ -9,15 +9,12 @@ import { VectorizationPipeline } from "../Domain/Pipeline/VectorizationPipeline"
 export class VectorizeElement {
     constructor(
         private repository: ElementRepository,
+        private pipeline: VectorizationPipeline
     ) { }
 
     async run(id: ElementId, image: Image, scale: ElementScale, precision: ElementPrecision): Promise<void> {
         // 1. Ejecutamos el pipeline de forma estática
-        const result = await VectorizationPipeline.run({
-            image,
-            scale,
-            precision
-        });
+        const result = await this.pipeline.run({ image, scale, precision });
 
         // 2. Creamos el elemento con los resultados del pipeline
         const element = Element.create(

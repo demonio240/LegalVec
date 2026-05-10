@@ -4,8 +4,6 @@ import { ElementId } from "../../Shared/Domain/Vectorizer/ElementId";
 import { Image } from "../Domain/VO/Image";
 import { ElementScale } from "../Domain/VO/Scale";
 import { ElementPrecision } from "../Domain/VO/Precision";
-import { OptimizedSvg } from "../Domain/VO/OptimizedSvg";
-import { ReductionRate } from "../Domain/VO/ReductionRate";
 
 // Fíjate que esto NO tiene ningún import de '@nestjs/cqrs'. Es 100% puro.
 export class VectorizeElementCommandHandler {

@@ -12,18 +12,14 @@ export class VectorizerModuleUnitTestCase extends UnitTestCase {
     private repositoryMock!: MockProxy<ElementRepository>;
     private tracerMock!: MockProxy<ImageTracerEngine>;
     private optimizerMock!: MockProxy<SvgOptimizerEngine>;
+    private pipelineMock!: MockProxy<VectorizationPipeline>;
 
     setUp(): void {
         super.setUp();
         this.repositoryMock = this.mock<ElementRepository>();
         this.tracerMock = this.mock<ImageTracerEngine>();
         this.optimizerMock = this.mock<SvgOptimizerEngine>();
-
-        // Configuramos el pipeline con los mocks para los tests
-        VectorizationPipeline.configure([
-            new ImageVectorizerService(this.tracerMock),
-            new OptmizeSvgService(this.optimizerMock)
-        ]);
+        this.pipelineMock = this.mock<VectorizationPipeline>();
     }
 
     repository() {
@@ -38,12 +34,20 @@ export class VectorizerModuleUnitTestCase extends UnitTestCase {
         this.optimizerMock.optimize.mockResolvedValue({ svg, reductionRate });
     }
 
+    pipeline() {
+        return this.pipelineMock;
+    }
+
+    shouldRunPipeline(result: any) {
+        this.pipelineMock.run.mockResolvedValue(result);
+    }
+
     assertLastSavedElementIs(expectedElement: Element): void {
         expect(this.repositoryMock.save).toHaveBeenCalledWith(expectedElement);
     }
 
     assertNotSave(): void {
-    expect(this.repositoryMock.save).not.toHaveBeenCalled();
-}
+        expect(this.repositoryMock.save).not.toHaveBeenCalled();
+    }
 }
 
